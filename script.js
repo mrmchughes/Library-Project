@@ -1,11 +1,5 @@
 //myLibrary stores the books
-let myLibrary = [
-   {
-      title: 'Test Title',
-      author: 'Test Author',
-      pages: 'Test Pages',
-   }
-];
+let myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 
 let str = localStorage.getItem('myLibrary');
 
@@ -16,10 +10,6 @@ function Book(title, author, pages, read) {
    this.title = title
    this.author = author
    this.pages = pages
-   this.read = '' //not been read or been read
-   this.info = function () {
-      return title + ' by ' + author + ',' + ' is ' + pages + ' pages long' + ',' + ' has ' + read + '.'
-   }
 };
 
 //submitButton runs the addBookToLibrary() function
@@ -51,8 +41,6 @@ function addBookToLibrary() {
       let jsonMyLibrary = JSON.stringify(myLibrary);
 
       localStorage.setItem('myLibrary', jsonMyLibrary);
-
-      
    
       //once new Book is pushed to array, clears the previous values
       document.getElementById('titleField').value = '';
@@ -67,12 +55,11 @@ function bookDisplay(){
    container.innerHTML = '';
 
    for (let i = 0; i < myLibrary.length; i++) {
-      console.log("I am bookDisplay!");
-
       let bookContainer = document.createElement('div');
       let book = myLibrary[i];
 
       let bookDiv = document.createElement('div'); 
+      bookDiv.setAttribute('class', 'bookDivClass');
 
       let bookText = document.createElement('p');
       bookText.textContent = book.title + ' by ' + book.author + ',' + ' is ' + book.pages + ' pages long' + '.';
@@ -101,14 +88,20 @@ function bookDisplay(){
 
       function removeBookFromLibrary(){
          //removes selected book from library onclick
-         myLibrary.splice([i], 1)
+         myLibrary.splice([i], 1);
+
+         let jsonMyLibrary = JSON.stringify(myLibrary);
+
+         localStorage.setItem('myLibrary', jsonMyLibrary);
+
+         bookDisplay();
       }
 
       //appends elements to a Book's entry div
       bookDiv.appendChild(bookText);
       bookDiv.appendChild(haveBeenReadText);
-      bookContainer.appendChild(readBookButton);
-      bookContainer.appendChild(removeBookButton);
+      bookDiv.appendChild(readBookButton);
+      bookDiv.appendChild(removeBookButton);
       bookContainer.appendChild(bookDiv);
       container.appendChild(bookContainer);
    }

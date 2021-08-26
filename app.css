@@ -1,3 +1,24 @@
 div {
-  border: 1px solid red;
+  text-align: center;
+}
+
+.btn {
+  margin: 15px;
+}
+
+#projectContainer {
+  margin: auto;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+#libraryContainer {
+  margin-top: 25px;
+  padding: 0px;
+}
+
+.bookDivClass {
+  margin: -1px;
+  border: 1px solid black;
 }
