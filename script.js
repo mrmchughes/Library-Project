@@ -6,12 +6,13 @@ let str = localStorage.getItem('myLibrary');
 let parsedObj = JSON.parse(str);
 
 //the Book function creates new Book objects
-function Book(title, author, pages, read) {
-   this.title = title
-   this.author = author
-   this.pages = pages
-};
-
+class Book {
+   constructor(title, author, pages) {
+      this.title = title
+      this.author = author
+      this.pages = pages
+   };
+}
 //submitButton runs the addBookToLibrary() function
 document.getElementById("submitButton").addEventListener('click', addBookToLibrary);
 
@@ -106,5 +107,3 @@ function bookDisplay(){
       container.appendChild(bookContainer);
    }
 };
-//test book example below
-//const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not been read")
